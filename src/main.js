@@ -1,24 +1,36 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { PLACES } from "./places.js";
+import { haversineKm, approximateRoadKm } from "./geo.js";
+import { estimateForModes } from "./emission.js";
+import { fillSelects, renderResults } from "./ui.js";
+import { drawMiniMap } from "./miniMap.js";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+function getPlaceById(id) {
+  return PLACES.find(p => p.id === id);
+}
 
-setupCounter(document.querySelector('#counter'))
+function compare() {
+  const oId = document.getElementById("origin").value;
+  const dId = document.getElementById("destination").value;
+  if (oId === dId) return;
+
+  const o = getPlaceById(oId);
+  const d = getPlaceById(dId);
+
+  // Distance (km): straight-line × road factor
+  const straight = haversineKm(o.lat, o.lon, d.lat, d.lon);
+  const km = approximateRoadKm(straight, 1.25);
+
+  const comps = estimateForModes(km);
+
+  // Update UI
+  renderResults(comps, () => drawMiniMap(o, d));
+}
+
+function bootstrap() {
+  fillSelects(PLACES);
+  document.getElementById("go").addEventListener("click", compare);
+  // initial render
+  compare();
+}
+
+bootstrap();
