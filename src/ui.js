@@ -1,3 +1,6 @@
+import { estimateCalories } from "./calories.js";
+import { estimateCost } from "./cost.js";
+
 const MODE_LABEL = {
   DRIVING: "Car",
   TRANSIT: "Public Transport",
@@ -63,26 +66,36 @@ export function renderResults(items, onPreview, selectedMode) {
     title.className = "gm-result__title";
     title.textContent = MODE_LABEL[item.mode] ?? item.mode;
 
-    const desc = document.createElement("div");
-    desc.className = "gm-result__desc";
-    desc.textContent = `${item.distance_km.toFixed(1)} km • ${item.emissions_g.toLocaleString()} g CO₂`;
+    // 🔶 Impact chips: calories + cost
+    const chips = document.createElement("div");
+    chips.className = "gm-chips";
 
-    const links = document.createElement("div");
-    links.className = "gm-result__links";
-    const preview = document.createElement("button");
-    preview.type = "button";
-    preview.className = "gm-link";
-    preview.textContent = "Preview";
-    preview.addEventListener("click", (e) => { e.stopPropagation(); onPreview(item); });
-    links.appendChild(preview);
+    const calories = calcCalories(item); // helper below
+    const cost = calcCost(item);
+
+    const calChip = document.createElement("span");
+    calChip.className = "gm-chip gm-chip--cal";
+    calChip.textContent = `${Math.round(calories)} Calories Burned`;
+
+    const costChip = document.createElement("span");
+    if (cost <= 0.0001) {
+      costChip.className = "gm-chip gm-chip--free";
+      costChip.textContent = "Free";
+    } else {
+      costChip.className = "gm-chip gm-chip--cost";
+      costChip.textContent = `S$${cost.toFixed(2)}`;
+    }
+
+    chips.appendChild(calChip);
+    chips.appendChild(costChip);
 
     body.appendChild(title);
-    body.appendChild(desc);
-    body.appendChild(links);
+    body.appendChild(chips);
+
     left.appendChild(icon);
     left.appendChild(body);
 
-    // RIGHT — emissions (big), duration, distance
+    // RIGHT — big emissions, then duration, then distance
     const right = document.createElement("div");
     right.className = "gm-result__right";
 
@@ -105,6 +118,7 @@ export function renderResults(items, onPreview, selectedMode) {
     li.appendChild(left);
     li.appendChild(right);
 
+    // Row click previews map
     li.addEventListener("click", () => onPreview(item));
     li.addEventListener("keypress", (e) => { if (e.key === "Enter") onPreview(item); });
 
@@ -113,4 +127,12 @@ export function renderResults(items, onPreview, selectedMode) {
 
   wrap.appendChild(list);
   onPreview(items[0]);
+}
+
+// --- tiny helpers using your new modules (import at top if in separate files) ---
+function calcCalories(item) {
+  return estimateCalories(item.mode, item.duration_min, item.distance_km);
+}
+function calcCost(item) {
+  return estimateCost(item.mode, item.duration_min, item.distance_km);
 }
