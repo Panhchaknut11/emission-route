@@ -1,48 +1,82 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Low-Emission Route Recommender (Prototype)</title>
-    <link rel="stylesheet" href="/src/styles.css"/>
-  </head>
-  <body>
-    <div id="app">
-      <aside id="sidebar">
-        <h1>Low-Emission Route Recommender</h1>
 
-        <div class="field">
-          <label for="origin">Origin</label>
-          <select id="origin" class="input"></select>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Low-Emission Route Recommender (Prototype)</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <noscript>This app needs JavaScript enabled.</noscript>
+
+  <div id="app">
+    <!-- Left panel -->
+    <aside id="sidebar" aria-label="Route planner">
+      <h1>Low-Emission Route Recommender</h1>
+
+      <!-- Transport Tabs -->
+      <div class="gm-tabs" role="tablist" aria-label="Transport modes">
+        <button class="gm-tab" role="tab" aria-selected="false" data-mode="BEST">
+          <span class="icon" aria-hidden="true">🌍</span>
+          <span class="label">Best Route</span>
+        </button>
+        <button class="gm-tab" role="tab" aria-selected="false" data-mode="DRIVING">
+          <span class="icon" aria-hidden="true">🚗</span>
+          <span class="label">Driving</span>
+        </button>
+        <button class="gm-tab" role="tab" aria-selected="false" data-mode="TRANSIT">
+          <span class="icon" aria-hidden="true">🚌</span>
+          <span class="label">Transit</span>
+        </button>
+        <button class="gm-tab" role="tab" aria-selected="false" data-mode="WALKING">
+          <span class="icon" aria-hidden="true">🚶</span>
+          <span class="label">Walking</span>
+        </button>
+        <button class="gm-tab" role="tab" aria-selected="false" data-mode="BICYCLING">
+          <span class="icon" aria-hidden="true">🚴</span>
+          <span class="label">Cycling</span>
+        </button>
+      </div>
+
+      <div class="gm-route-inputs">
+        <div class="gm-input-row">
+          <span class="gm-marker gm-origin" aria-hidden="true">🟢</span>
+          <select id="origin" class="gm-select" aria-label="Origin"></select>
         </div>
 
-        <div class="field">
-          <label for="destination">Destination</label>
-          <select id="destination" class="input"></select>
+        <button id="swap" class="gm-swap" type="button" title="Swap origin & destination"
+          aria-label="Swap origin and destination">⇅</button>
+
+        <div class="gm-input-row">
+          <span class="gm-marker gm-destination" aria-hidden="true">📍</span>
+          <select id="destination" class="gm-select" aria-label="Destination"></select>
         </div>
+      </div>
 
-        <button id="go" class="btn">Compare Routes</button>
 
-        <div class="legend">
-          <strong>Assumed emission factors (g CO₂ / km per passenger)</strong>
-          <div>• Car: 180 • Bus: 80 • Rail: 45 • Bike/Walk: 0</div>
-        </div>
+      <button id="go" class="btn" type="button">Compare Routes</button>
 
-        <div class="divider"></div>
-        <div id="results"></div>
+      <div class="legend" aria-live="polite">
+        <strong>Assumed emission factors (g CO₂ / km per passenger)</strong>
+        <div>• Driving: 180 • Bus: 80 • Rail: 45 • Walk/Bike: 0</div>
+      </div>
 
-        <p class="note">
-          Prototype uses approximate straight-line distance × road factor (no external APIs).
-          Speeds: Car 35 km/h, PT 25 km/h, Bike 15 km/h, Walk 4.5 km/h.
-        </p>
-      </aside>
+      <div class="divider" role="separator" aria-hidden="true"></div>
 
-      <main id="map">
-        <!-- Simple placeholder “map”: we’ll render a tiny SVG line between points -->
-        <svg id="miniMap" width="100%" height="100%" viewBox="0 0 800 600"></svg>
-      </main>
-    </div>
+      <!-- Results list goes here -->
+      <div id="results" aria-live="polite"></div>
+    </aside>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    <!-- Right: mini map -->
+    <main id="map" aria-label="Mini map">
+      <svg id="miniMap" width="100%" height="100%" viewBox="0 0 800 600"></svg>
+    </main>
+  </div>
+
+  <!-- App entry -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
