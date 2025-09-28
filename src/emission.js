@@ -1,7 +1,7 @@
 export const EMISSION_FACTORS = {
-  DRIVING: 180,   // g CO2 / km
-  BUS: 80,
-  RAIL: 45,
+  DRIVING: 170,   // g CO2 / km
+  BUS: 97,
+  MRT: 29,
   DEFAULT_TRANSIT: 60,
   WALKING: 0,
   BICYCLING: 0

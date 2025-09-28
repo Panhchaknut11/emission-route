@@ -37,7 +37,9 @@ function compare(selectedMode) {
     display = comps;
   }
 
-  renderResults(display, () => drawMiniMap(o, d));
+  // inside compare(selectedMode)
+  renderResults(display, () => drawMiniMap(o, d), selectedMode);
+
 }
 
 function setActiveTab(clicked) {
