@@ -3,16 +3,20 @@ import { estimateCost } from "./cost.js";
 
 const MODE_LABEL = {
   DRIVING: "Car",
-  TRANSIT: "Public Transport",
+  BUS: "Bus",
+  MRT: "MRT",
   BICYCLING: "Bicycle",
   WALKING: "Walking"
 };
+
 const MODE_ICON = {
   DRIVING: "🚗",
-  TRANSIT: "🚌",
+  BUS: "🚌",
+  MRT: "🚇",        // or 🛤️ if you prefer
   BICYCLING: "🚴",
   WALKING: "🚶"
 };
+
 
 export function fillSelects(places) {
   const oSel = document.getElementById("origin");

@@ -16,30 +16,33 @@ function compare(selectedMode) {
   const o = getPlaceById(oId);
   const d = getPlaceById(dId);
 
-  // Distance (km): straight-line × road factor
   const straight = haversineKm(o.lat, o.lon, d.lat, d.lon);
   const km = approximateRoadKm(straight, 1.25);
 
-  // All modes for this OD pair
   const comps = estimateForModes(km);
 
-  // Global lowest-emissions mode
-  const bestOverall = comps.reduce((min, c) =>
-    c.emissions_g < min.emissions_g ? c : min, comps[0]
-  );
+  // rank by emissions (ascending) and remember rank
+  const ranked = [...comps]
+    .sort((a, b) => a.emissions_g - b.emissions_g)
+    .map((c, i) => ({ ...c, _rank: i + 1 }));
 
   let display;
-  if (selectedMode === "BEST") {
-    display = [bestOverall];   // show only the lowest
-  } else if (selectedMode) {
-    display = comps.filter(c => c.mode === selectedMode);
-  } else {
-    display = comps;
+  switch (selectedMode) {
+    case "BEST":
+      // 🔹 Top 3 best overall
+      display = ranked.slice(0, 3);
+      break;
+    case "TRANSIT":
+      display = ranked.filter(c => c.mode === "BUS" || c.mode === "MRT");
+      break;
+    case undefined:
+      display = ranked;
+      break;
+    default:
+      display = ranked.filter(c => c.mode === selectedMode);
   }
 
-  // inside compare(selectedMode)
   renderResults(display, () => drawMiniMap(o, d), selectedMode);
-
 }
 
 function setActiveTab(clicked) {
