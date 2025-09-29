@@ -1,22 +1,22 @@
-🌎 **Emission Route Map**
+<h1>🌎 Emission Route Map Prototype</h1>
 
 This is a prototype that compares transport options in Singapore and recommends the lowest-emission route.  
 
-✨ **Features**
+<h2>✨ Features</h2>
 
 - Compare **emission factors** for different modes of transport  
 - Estimate **Calories burned** based on activity type and duration 
 - **Cost estimation** of each transport mode 
 - **Top 3 Best Routes** with the lowest emisson      
 
-🛠️ **Tech Stack**
+<h2>🛠️ Tech Stack</h2>
 
 - **Vite + Vanilla JS** for bundling  
 - **HTML5 + CSS3** (custom styles, no frameworks)  
 - **SVG rendering** for the mini-map  
 - No backend required – all calculations are done client-side
   
-🚀 **Getting Started**
+<h2>🚀 Getting Started</h2>
 
 1. Clone this repo
 ``` 
@@ -34,7 +34,8 @@ npm run dev
 
 Once done, open the URL shown in your terminal.
 
-📂 **Project Structure**
+<h2>📂 Project Structure</h2>
+
 ```
 emission-route/
 ├── node_modules/ 
@@ -53,3 +54,4 @@ emission-route/
 ├── package.json
 └── README.md
 ```
+
