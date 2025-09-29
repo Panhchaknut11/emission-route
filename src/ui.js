@@ -2,7 +2,8 @@ import { estimateCalories } from "./calories.js";
 import { estimateCost } from "./cost.js";
 
 const MODE_LABEL = {
-  DRIVING: "Car",
+  DIESEL_CAR: "Diesel Car",
+  EV_CAR: "EV Car",
   BUS: "Bus",
   MRT: "MRT",
   BICYCLING: "Bicycle",
@@ -10,9 +11,10 @@ const MODE_LABEL = {
 };
 
 const MODE_ICON = {
-  DRIVING: "🚗",
+  DIESEL_CAR: "🚗",
+  EV_CAR: "🔋",   // or ⚡🚗 to show it’s electric
   BUS: "🚌",
-  MRT: "🚇",        // or 🛤️ if you prefer
+  MRT: "🚇",
   BICYCLING: "🚴",
   WALKING: "🚶"
 };

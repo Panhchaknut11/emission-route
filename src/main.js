@@ -29,14 +29,13 @@ function compare(selectedMode) {
   let display;
   switch (selectedMode) {
     case "BEST":
-      // 🔹 Top 3 best overall
       display = ranked.slice(0, 3);
       break;
     case "TRANSIT":
       display = ranked.filter(c => c.mode === "BUS" || c.mode === "MRT");
       break;
-    case undefined:
-      display = ranked;
+    case "DRIVING":                     // ← FIX: include both car types
+      display = ranked.filter(c => c.mode === "DIESEL_CAR" || c.mode === "EV_CAR");
       break;
     default:
       display = ranked.filter(c => c.mode === selectedMode);

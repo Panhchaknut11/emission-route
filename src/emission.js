@@ -1,27 +1,29 @@
 export const EMISSION_FACTORS = {
-  DRIVING: 170,   // g CO2 / km
+  DIESEL_CAR: 170,   // g CO2 / km
+  EV_CAR: 75,        // g CO2 / km
   BUS: 70,
   MRT: 13,
   WALKING: 0,
   BICYCLING: 0
 };
 
-// Speeds (km/h) for prototype duration calculations
 export const SPEEDS = {
-  DRIVING: 35,
-  BUS: 22,        // average city bus speed
-  MRT: 35,        // average MRT speed
+  DIESEL_CAR: 35,
+  EV_CAR: 35,
+  BUS: 22,
+  MRT: 35,
   BICYCLING: 15,
   WALKING: 4.5
 };
 
 export function estimateForModes(km) {
   const modes = [
-    { mode: "DRIVING", factor: EMISSION_FACTORS.DRIVING, speed: SPEEDS.DRIVING },
-    { mode: "BUS",     factor: EMISSION_FACTORS.BUS,     speed: SPEEDS.BUS },
-    { mode: "MRT",     factor: EMISSION_FACTORS.MRT,     speed: SPEEDS.MRT },
-    { mode: "BICYCLING", factor: EMISSION_FACTORS.BICYCLING, speed: SPEEDS.BICYCLING },
-    { mode: "WALKING",   factor: EMISSION_FACTORS.WALKING,   speed: SPEEDS.WALKING }
+    { mode: "DIESEL_CAR", factor: EMISSION_FACTORS.DIESEL_CAR, speed: SPEEDS.DIESEL_CAR },
+    { mode: "EV_CAR",     factor: EMISSION_FACTORS.EV_CAR,     speed: SPEEDS.EV_CAR },
+    { mode: "BUS",        factor: EMISSION_FACTORS.BUS,        speed: SPEEDS.BUS },
+    { mode: "MRT",        factor: EMISSION_FACTORS.MRT,        speed: SPEEDS.MRT },
+    { mode: "BICYCLING",  factor: EMISSION_FACTORS.BICYCLING,  speed: SPEEDS.BICYCLING },
+    { mode: "WALKING",    factor: EMISSION_FACTORS.WALKING,    speed: SPEEDS.WALKING }
   ];
 
   return modes.map(m => {

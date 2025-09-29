@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Emission Route Map Prototype</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 
@@ -17,8 +18,8 @@
       <!-- Transport Tabs -->
       <div class="gm-tabs" role="tablist" aria-label="Transport modes">
         <button class="gm-tab" role="tab" aria-selected="false" data-mode="BEST">
-          <span class="icon" aria-hidden="true">🌍</span>
-          <span class="label">Best Route</span>
+          <span class="icon" aria-hidden="true">🌱</span>
+          <span class="label">Recommended</span>
         </button>
         <button class="gm-tab" role="tab" aria-selected="false" data-mode="DRIVING">
           <span class="icon" aria-hidden="true">🚗</span>
@@ -58,7 +59,8 @@
       <div class="legend">
         <strong>Assumed emission factors (CO₂ / km per passenger)</strong>
         <ul class="legend-list">
-          <li>• Driving: 170g</li>
+          <li>• Diesel Car: 170g</li>
+          <li>• EV Car: 75g</li>
           <li>• Bus: 70g</li>
           <li>• MRT: 13g</li>
           <li>• Walk/Bike: 0g</li>

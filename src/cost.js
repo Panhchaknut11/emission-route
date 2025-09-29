@@ -1,39 +1,28 @@
-// cost.js
 const COST_RULES = {
-  WALKING: { base: 0, perKm: 0, perHour: 0 },
-  BICYCLING: { base: 0, perKm: 0, perHour: 1 },
-  DRIVING: { base: 3.4, perKm: 0.65, perHour: 0 },
+  // cars
+  DIESEL_CAR: { base: 3.4, perKm: 0.65 },
+  EV_CAR:     { base: 3.4, perKm: 0.45 }, // or keep 0.65 if you prefer same
+  // transit
   BUS: { min: 1.19, perKm: 0.18, threshold: 3.2, max: 2.47 },
-  MRT: { min: 1.19, perKm: 0.18, threshold: 3.2, max: 2.47 }
+  MRT: { min: 1.19, perKm: 0.18, threshold: 3.2, max: 2.47 },
+  // active
+  BICYCLING: { perHour: 1 },
+  WALKING:   { }
 };
 
 export function estimateCost(mode, durationMin, distanceKm) {
   const r = COST_RULES[mode];
   if (!r) return 0;
 
-  // Driving
-  if (mode === "DRIVING") {
+  if (mode === "DIESEL_CAR" || mode === "EV_CAR") {
     return r.base + distanceKm * r.perKm;
   }
-
-  // Cycling
-  if (mode === "BICYCLING") {
-    return (durationMin / 60) * r.perHour;
-  }
-
-  // Walking is free
+  if (mode === "BICYCLING") return (durationMin / 60) * r.perHour;
   if (mode === "WALKING") return 0;
 
-  // Bus & MRT
   if (mode === "BUS" || mode === "MRT") {
-    let cost;
-    if (distanceKm <= r.threshold) {
-      cost = r.min;
-    } else {
-      cost = r.min + (distanceKm - r.threshold) * r.perKm;
-    }
-    return Math.min(cost, r.max);
+    const base = distanceKm <= r.threshold ? r.min : r.min + (distanceKm - r.threshold) * r.perKm;
+    return Math.min(base, r.max);
   }
-
   return 0;
 }
