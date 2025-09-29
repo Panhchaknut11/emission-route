@@ -54,4 +54,8 @@ emission-route/
 ├── package.json
 └── README.md
 ```
+<h2>⚠️ Disclaimer</h2>
+
+The mini-map is a simplified, stylized background built with SVG shapes and is not a real map of Singapore.
+This project is a prototype for educational and demonstration purposes only and does not provide real navigation or geospatial accuracy.
 
