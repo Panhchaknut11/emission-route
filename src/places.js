@@ -1,5 +1,3 @@
-// A tiny set of SG places with lat/lng for distance calculations
-// A set of SG places with lat/lng for distance calculations
 export const PLACES = [
   { id: "orchard_mrt", name: "Orchard MRT", lat: 1.3039, lon: 103.8318 },
   { id: "marina_bay_sands", name: "Marina Bay Sands", lat: 1.2834, lon: 103.8607 },

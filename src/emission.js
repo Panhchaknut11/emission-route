@@ -1,6 +1,6 @@
 export const EMISSION_FACTORS = {
-  DIESEL_CAR: 170,   // g CO2 / km
-  EV_CAR: 75,        // g CO2 / km
+  DIESEL_CAR: 170,   
+  EV_CAR: 75,        
   BUS: 70,
   MRT: 13,
   WALKING: 0,

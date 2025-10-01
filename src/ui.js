@@ -12,7 +12,7 @@ const MODE_LABEL = {
 
 const MODE_ICON = {
   DIESEL_CAR: "🚗",
-  EV_CAR: "🔋",   // or ⚡🚗 to show it’s electric
+  EV_CAR: "🔋",   
   BUS: "🚌",
   MRT: "🚇",
   BICYCLING: "🚴",
@@ -38,7 +38,7 @@ export function fillSelects(places) {
  * Google-Maps-like list
  * @param {Array<{mode:string,distance_km:number,duration_min:number,emissions_g:number}>} items
  * @param {(item:any)=>void} onPreview
- * @param {string} selectedMode  // "BEST" | "DRIVING" | "TRANSIT" | "WALKING" | "BICYCLING"
+ * @param {string} selectedMode  
  */
 
 export function renderResults(items, onPreview, selectedMode) {
@@ -76,7 +76,7 @@ export function renderResults(items, onPreview, selectedMode) {
     const chips = document.createElement("div");
     chips.className = "gm-chips";
 
-    const calories = calcCalories(item); // helper below
+    const calories = calcCalories(item); 
     const cost = calcCost(item);
 
     const calChip = document.createElement("span");

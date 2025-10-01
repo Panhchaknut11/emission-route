@@ -34,7 +34,7 @@ function compare(selectedMode) {
     case "TRANSIT":
       display = ranked.filter(c => c.mode === "BUS" || c.mode === "MRT");
       break;
-    case "DRIVING":                     // ← FIX: include both car types
+    case "DRIVING":                     
       display = ranked.filter(c => c.mode === "DIESEL_CAR" || c.mode === "EV_CAR");
       break;
     default:

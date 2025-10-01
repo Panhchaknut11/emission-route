@@ -1,7 +1,7 @@
 // Haversine distance in km between two lat/lon points
 export function haversineKm(lat1, lon1, lat2, lon2) {
   const toRad = d => (d * Math.PI) / 180;
-  const R = 6371; // km
+  const R = 6371; 
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
   const a =

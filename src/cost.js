@@ -1,7 +1,7 @@
 const COST_RULES = {
   // cars
   DIESEL_CAR: { base: 3.4, perKm: 0.65 },
-  EV_CAR:     { base: 3.4, perKm: 0.45 }, // or keep 0.65 if you prefer same
+  EV_CAR:     { base: 3.4, perKm: 0.45 }, 
   // transit
   BUS: { min: 1.19, perKm: 0.18, threshold: 3.2, max: 2.47 },
   MRT: { min: 1.19, perKm: 0.18, threshold: 3.2, max: 2.47 },
