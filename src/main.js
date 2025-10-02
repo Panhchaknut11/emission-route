@@ -64,7 +64,7 @@ function setupTabs() {
   });
 
   // Default active tab (choose what you prefer)
-  const defaultTab = document.querySelector('.gm-tab[data-mode="TRANSIT"]') || tabs[0];
+  const defaultTab = document.querySelector('.gm-tab[data-mode="BEST"]') || tabs[0];
   if (defaultTab) {
     setActiveTab(defaultTab);
   }
@@ -80,9 +80,6 @@ function bootstrap() {
   });
 
   setupTabs();
-  // Initial render using default active tab
-  const active = document.querySelector(".gm-tab.is-active");
-  compare(active ? active.dataset.mode : undefined);
 }
 
 document.getElementById('swap')?.addEventListener('click', () => {

@@ -19,19 +19,34 @@ const MODE_ICON = {
   WALKING: "🚶"
 };
 
-
 export function fillSelects(places) {
   const oSel = document.getElementById("origin");
   const dSel = document.getElementById("destination");
-  oSel.innerHTML = ""; dSel.innerHTML = "";
+  oSel.innerHTML = ""; 
+  dSel.innerHTML = "";
+
+  // Add an empty option at the top
+  const emptyOpt1 = document.createElement("option");
+  emptyOpt1.value = "";
+  emptyOpt1.textContent = "Select Origin...";
+  oSel.appendChild(emptyOpt1);
+
+  const emptyOpt2 = document.createElement("option");
+  emptyOpt2.value = "";
+  emptyOpt2.textContent = "Select Destination...";
+  dSel.appendChild(emptyOpt2);
+
   for (const p of places) {
     const opt = document.createElement("option");
-    opt.value = p.id; opt.textContent = p.name;
+    opt.value = p.id; 
+    opt.textContent = p.name;
     oSel.appendChild(opt);
     dSel.appendChild(opt.cloneNode(true));
   }
-  if (oSel.querySelector('option[value="orchard_mrt"]')) oSel.value = "orchard_mrt";
-  if (dSel.querySelector('option[value="marina_bay_sands"]')) dSel.value = "marina_bay_sands";
+
+  // Don’t preselect anything
+  oSel.value = "";
+  dSel.value = "";
 }
 
 /**
